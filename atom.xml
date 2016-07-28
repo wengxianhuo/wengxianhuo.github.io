@@ -17,8 +17,8 @@
   
   <entry>
     <title>My new post</title>
-    <link href="http://yoursite.com/2016/07/28/My-new-post/"/>
-    <id>http://yoursite.com/2016/07/28/My-new-post/</id>
+    <link href="http://yoursite.com/2016/07/28/%E6%B5%8B%E8%AF%95Markdown%E8%AF%AD%E6%B3%95/"/>
+    <id>http://yoursite.com/2016/07/28/测试Markdown语法/</id>
     <published>2016-07-28T05:30:06.000Z</published>
     <updated>2016-07-28T05:30:06.972Z</updated>
     
@@ -31,8 +31,8 @@
   
   <entry>
     <title>Hello World</title>
-    <link href="http://yoursite.com/2016/07/28/hello-world/"/>
-    <id>http://yoursite.com/2016/07/28/hello-world/</id>
+    <link href="http://yoursite.com/2016/07/28/%E7%AC%AC%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0/"/>
+    <id>http://yoursite.com/2016/07/28/第一篇文章/</id>
     <published>2016-07-28T05:27:07.334Z</published>
     <updated>2016-07-28T05:27:07.334Z</updated>
     
