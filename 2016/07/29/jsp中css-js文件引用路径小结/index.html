@@ -3,13 +3,17 @@
 <head>
   <meta charset="utf-8">
   
-  <title>居仙阁</title>
+  <title>jsp中css,js文件引用路径小结 | 居仙阁</title>
   <meta name="author" content="xianhuojun">
+  
+  <meta name="description" content="今天下午花了不少时间找这方面的资料，自己总结一下。先讲自己已经理清头绪的：相对路径是指，相对当前的jsp页面来说的，也就是说假想当前目录就为此时的jsp页面，要走怎样的路径才可以到达目标js或者css。如果jsp文件与目标js或css在同一级目录，如图：
+
+大家都知道，assets是存放js，css">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  
+  <meta property="og:title" content="jsp中css,js文件引用路径小结"/>
   <meta property="og:site_name" content="居仙阁"/>
 
   
@@ -43,8 +47,7 @@
 <div class="clearfix"></div>
 </header>
   <div id="content" class="inner">
-    <div id="main-col" class="alignleft"><div id="wrapper">
-  <article class="post">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
   
   <div class="post-content">
     <header>
@@ -54,7 +57,7 @@
       
       
   
-    <h1 class="title"><a href="/2016/07/29/jsp中css-js文件引用路径小结/">jsp中css,js文件引用路径小结</a></h1>
+    <h1 class="title">jsp中css,js文件引用路径小结</h1>
   
 
     </header>
@@ -76,6 +79,29 @@
       
         
         
+  
+  <div class="tags">
+    <a href="/tags/js，css引用路径/">js，css引用路径</a>
+  </div>
+
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
       
       <div class="clearfix"></div>
     </footer>
@@ -83,61 +109,27 @@
 </article>
 
 
+<section id="comment">
+  <h1 class="title">留言</h1>
 
-
-  <article class="post">
   
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2016-07-28T13:07:50.000Z"><a href="/2016/07/28/谈谈回调函数这回事/">2016-07-28</a></time>
-      
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="http://yoursite.com/2016/07/29/jsp中css-js文件引用路径小结/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
       
   
-    <h1 class="title"><a href="/2016/07/28/谈谈回调函数这回事/">浅谈android回调</a></h1>
-  
+</section>
 
-    </header>
-    <div class="entry">
-      
-        <p>　　在android开发中，回调接口出现的次数可谓不少，回调接口和回调函数是一码事。那么什么是回调函数呢？ </p>
-<p>　　顾名思义，回调就是回过头去调用某个地方的函数，这种调用是注重时机的，在某个特定的时间回去调用特定的函数。假设一个场景，有一个button，点击button可以移除listview的第一个item，这个时候就可以定义一个回调接口:</p>
-<p><code>public interface OnButtonClickListener{void onClickRemove();}</code></p>
-<p>直接让Adapter实现这个接口</p>
-<p>`@override </p>
-<p>public void onClickRemove()</p>
-<p>{</p>
-<p>mItems.remove(0);</p>
-<p>notifyItemRemoved(0);</p>
-<p>}`</p>
-<p>　　在button所在的MainActivity声明一个全局变量OnButtonClickListener mOnButtonClickListener = null；并且在给listview设置适配器的同时，将Adapter强转为OnButtonClickListener即</p>
-<p><code>mOnButtonClickListener = (OnButtonClickListener)adapter;</code></p>
-<p>这个时候我们就获得了回调接口的实现了。</p>
-<p>　　万事俱备，就等时机到来。当button被点击的时候，我们就直接调用mOnButtonClickListener.onClickRemove()方法，实现了点击button删除第一个item的功能。</p>
-<p>　　回过头来分析一下，回调的使用一般都是在两个环境中，在一个环境中的某个时机，我们想更新另一个环境的数据，那就考虑用回调了。接口实现方就是需要被更新的环境，接口调用方（也是接口书写的一方）通过调用接口的方法就可以去目标环境更新数据了。这就是回过去调用的过程嘛，当然，我们可以在调用方传递参数过去，以便实现特定功能，这就是看接口的书写格式咯。</p>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
-
-<nav id="pagination">
-  
-  
-  <div class="clearfix"></div>
-</nav></div></div>
+</div></div>
     <aside id="sidebar" class="alignright">
   <div class="search">
   <form action="//google.com/search" method="get" accept-charset="utf-8">

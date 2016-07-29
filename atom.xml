@@ -1,58 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>Hexo</title>
-  
+  <title>居仙阁</title>
+  <subtitle>有分享的地方就有成长的印记（本渣渣处于入门阶段，错误之处还望不吝指教）</subtitle>
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-07-28T05:30:06.972Z</updated>
+  <updated>2016-07-29T09:05:57.026Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
-    <name>John Doe</name>
+    <name>xianhuojun</name>
     
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>My new post</title>
-    <link href="http://yoursite.com/2016/07/28/%E6%B5%8B%E8%AF%95Markdown%E8%AF%AD%E6%B3%95/"/>
-    <id>http://yoursite.com/2016/07/28/测试Markdown语法/</id>
-    <published>2016-07-28T05:30:06.000Z</published>
-    <updated>2016-07-28T05:30:06.972Z</updated>
+    <title>jsp中css,js文件引用路径小结</title>
+    <link href="http://yoursite.com/2016/07/29/jsp%E4%B8%ADcss-js%E6%96%87%E4%BB%B6%E5%BC%95%E7%94%A8%E8%B7%AF%E5%BE%84%E5%B0%8F%E7%BB%93/"/>
+    <id>http://yoursite.com/2016/07/29/jsp中css-js文件引用路径小结/</id>
+    <published>2016-07-29T08:02:39.000Z</published>
+    <updated>2016-07-29T09:05:57.026Z</updated>
     
-    <summary type="html">
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Hello World</title>
-    <link href="http://yoursite.com/2016/07/28/%E7%AC%AC%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0/"/>
-    <id>http://yoursite.com/2016/07/28/第一篇文章/</id>
-    <published>2016-07-28T05:27:07.334Z</published>
-    <updated>2016-07-28T05:27:07.334Z</updated>
-    
-    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+    <content type="html"><![CDATA[<p>　　今天下午花了不少时间找这方面的资料，自己总结一下。先讲自己已经理清头绪的：相对路径是指，相对当前的jsp页面来说的，也就是说假想当前目录就为此时的jsp页面，要走怎样的路径才可以到达目标js或者css。如果jsp文件与目标js或css在同一级目录，如图：</p>
+<p><img src="https://raw.githubusercontent.com/wengxianhuo/pictures/master/same_dir.png" alt="同一目录"></p>
+<pre><code>大家都知道，assets是存放js，css资源的文件即assets/js和assets/css，为了图片比较简洁，我就不展开assets目录了。
+</code></pre><p>　　此时我们的相对路径应该这么写：assets/js/js文件 或者 assets/css/css文件。原因就是上面说的，对于相对路径，我们假想从当前jsp开始寻找目标资源，在同一级目录，是可以直接反问的，没什么弯路。</p>
+<p>但是，还有另一种情况，即：</p>
+<p><img src="https://raw.githubusercontent.com/wengxianhuo/pictures/master/other_dir.png" alt="同一目录"></p>
+<p>　　在这种情况下我们当然是没办法像上面一样直接就寻得资源，如图可知道当前jsp在低一级的目录，这时候我们要先找到跑到assets目录才行啊，所以出现了..这样的格式，使用..可以让我们回到上一级目录，即assets的所在目录，都找到assets目录了，自然也可以直接寻得资源，写法是：../assets/js/js文件或../assets/css/css文件<br>    ..有一个特别之处，他会自动往上一级寻找，如果上一级没找到，会寻找上上一级，直到根目录都没有找到assets目录就直接not found了</p>
+<p>　　现在我们推荐使用绝对路径就是/project/资源路径的形式，用这种方式出现的错误会比较少吧，感觉上。。。当然了，这里也有特别需要注意的一点就是，你在tomcat中的server配置中的context的path属性设置为什么，那对应的project就是什么。比如<code>&lt;Context path=&quot;/amazeUI&quot; docBase=&quot;AmazeUI&quot; reloadable=&quot;false&quot; /&gt;</code>那我设置的绝对路径就应该是/amazeUI/assert/js/js文件。</p>
+<p>　　如有不正之处，请多多包涵，多多指教。</p>
 ]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.
+      &lt;p&gt;　　今天下午花了不少时间找这方面的资料，自己总结一下。先讲自己已经理清头绪的：相对路径是指，相对当前的jsp页面来说的，也就是说假想当前目录就为此时的jsp页面，要走怎样的路径才可以到达目标js或者css。如果jsp文件与目标js或css在同一级目录，如图：&lt;/p&gt;
+&lt;p&gt;
     
     </summary>
     
+    
+      <category term="js，css引用路径" scheme="http://yoursite.com/tags/js%EF%BC%8Ccss%E5%BC%95%E7%94%A8%E8%B7%AF%E5%BE%84/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>浅谈android回调</title>
+    <link href="http://yoursite.com/2016/07/28/%E8%B0%88%E8%B0%88%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0%E8%BF%99%E5%9B%9E%E4%BA%8B/"/>
+    <id>http://yoursite.com/2016/07/28/谈谈回调函数这回事/</id>
+    <published>2016-07-28T13:07:50.000Z</published>
+    <updated>2016-07-29T09:09:20.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>　　在android开发中，回调接口出现的次数可谓不少，回调接口和回调函数是一码事。那么什么是回调函数呢？ </p>
+<p>　　顾名思义，回调就是回过头去调用某个地方的函数，这种调用是注重时机的，在某个特定的时间回去调用特定的函数。假设一个场景，有一个button，点击button可以移除listview的第一个item，这个时候就可以定义一个回调接口:</p>
+<p><code>public interface OnButtonClickListener{void onClickRemove();}</code></p>
+<p>直接让Adapter实现这个接口</p>
+<p>`@override </p>
+<p>public void onClickRemove()</p>
+<p>{</p>
+<p>mItems.remove(0);</p>
+<p>notifyItemRemoved(0);</p>
+<p>}`</p>
+<p>　　在button所在的MainActivity声明一个全局变量OnButtonClickListener mOnButtonClickListener = null；并且在给listview设置适配器的同时，将Adapter强转为OnButtonClickListener即</p>
+<p><code>mOnButtonClickListener = (OnButtonClickListener)adapter;</code></p>
+<p>这个时候我们就获得了回调接口的实现了。</p>
+<p>　　万事俱备，就等时机到来。当button被点击的时候，我们就直接调用mOnButtonClickListener.onClickRemove()方法，实现了点击button删除第一个item的功能。</p>
+<p>　　回过头来分析一下，回调的使用一般都是在两个环境中，在一个环境中的某个时机，我们想更新另一个环境的数据，那就考虑用回调了。接口实现方就是需要被更新的环境，接口调用方（也是接口书写的一方）通过调用接口的方法就可以去目标环境更新数据了。这就是回过去调用的过程嘛，当然，我们可以在调用方传递参数过去，以便实现特定功能，这就是看接口的书写格式咯。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;　　在android开发中，回调接口出现的次数可谓不少，回调接口和回调函数是一码事。那么什么是回调函数呢？ &lt;/p&gt;
+&lt;p&gt;　　顾名思义，回调就是回过头去调用某个地方的函数，这种调用是注重时机的，在某个特定的时间回去调用特定的函数。假设一个场景，有一个button，点击bu
+    
+    </summary>
+    
+    
+      <category term="随想" scheme="http://yoursite.com/tags/%E9%9A%8F%E6%83%B3/"/>
     
   </entry>
   
