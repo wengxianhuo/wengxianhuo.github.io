@@ -50,45 +50,6 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-08-08T13:07:50.000Z"><a href="/2016/08/08/杂谈/">2016-08-08</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2016/08/08/杂谈/">js学习小结</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p>　　首先我们先来说说js中的this在不同情况下的指代，在我看来只有两种不同的用法。this都是在函数中，这两种说的是函数被使用的两种情况，一种是正常的被调用执行，另一种是作为构造函数被new出来。第一种，this指代的是调用这个方法的对象，比如，在script体中直接执行，this指代的就是window，在<code>function father(){var value=&quot;father&quot; }</code> new father().property = function test(){var value=”test” alert(this.value)};其中的this就是指代调用这个函数的对象father。还有一种比较特殊的调用情况，用call，apply将调用对象进行了转化，此时this指代的还是调用这个函数的对象，只是调用者被转换了而已。第二种，this指代函数本身，当一个函数作为构造函数生成对象是，该函数内的this就是指代函数对象本身。</p>
-<p>　　然后我想说说jsp和Servlet的关系，请求jsp时，先检查在指定路径是否存在jsp。若存在并且是第一次访问，则将jsp转换成Servlet，并调用init初始化Servlet，这就生成了java文件，经过编译生成class字节码文件，最后执行返回结果，以后再次调用则直接从容器（服务器）调用Servlet，服务器被关闭的时候调用destory方法摧毁Servlet。总而言之，jsp生成Servlet，Servlet只会执行一次的init和destory，service则被多次调用。</p>
-<p>　　那我们就扯到了jsp的内置对象了，jsp的内置对象有，request，response，session，application，page，pageContext，out，config，exception，转换成Servlet，我们有HttpServletRequest：实例为request，HttpServletResponse：实例为response，等等。这些内置对象作为已经实例好的对象，我们直接使用便可。这时候我们可以联想一下&lt;% %&gt;的工作流程了，在jsp中，我们预先生成java代码，在转化成Servlet的时候，&lt;%%&gt;内的内容不需要处理直接取出变可以了，所以，我们可以在这里面进行内置对象的各种使用，到时候会直接转换成Servlet的。</p>
-<p>　　数组的定义方式：（1）声明：var array = new Array（）；赋值：array[0]=”1”;array[1]=”2”（2）声明与赋值： var array = new Array（”1”,”2”）；(3)声明与赋值：var array=[“1”,”2”];</p>
-<p>　　局部变量，在函数体内用var声明的变量。全局变量，在函数体外和函数体内不加var声明的变量。</p>
-<p>　　PrintWriter 是写到服务器上的。resp中的getWriter方法可以获得这个对象。接着用print方法就可以在页面上输出。Servlet的部署描述符web.xml肯定是要配置的，定位Servlet。servlet是嵌入了html代码的java类，jsp是嵌套了java代码的html页面</p>
-<p>在新建一个项目之前， 让tomcat知道项目的路径：path用户访问的逻辑路径，docBase是实际物理地址。reloadable大多数类被修改后自动重启<br>　　<br>因为http是一个基于响应与请求的无状态协议，需要有一个session对象跟踪用户。当用户登陆成功的时候应该session.setAttribute();接着可以通过getAttribute()验证.原理与map有些相似，能保持多个会话。其实就是让用户一直保持跟服务器的连接，如果用户断开与服务器的连接了，Session很自然的需要消失。</p>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
         <time datetime="2016-07-29T08:02:39.000Z"><a href="/2016/07/29/jsp中css-js文件引用路径小结/">2016-07-29</a></time>
       
       
@@ -194,7 +155,7 @@
   
     <li><a href="/tags/js，css引用路径/">js，css引用路径</a><small>1</small></li>
   
-    <li><a href="/tags/杂谈/">杂谈</a><small>1</small></li>
+    <li><a href="/tags/杂谈/">杂谈</a><small>0</small></li>
   
     <li><a href="/tags/随想/">随想</a><small>1</small></li>
   
