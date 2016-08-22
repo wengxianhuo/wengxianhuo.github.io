@@ -3,16 +3,16 @@
 <head>
   <meta charset="utf-8">
   
-  <title>浅谈android回调 | 居仙阁</title>
+  <title>Android Studio内存泄露 | 居仙阁</title>
   <meta name="author" content="xianhuojun">
   
-  <meta name="description" content="在android开发中，回调接口出现的次数可谓不少，回调接口和回调函数是一码事。那么什么是回调函数呢？ 
-　　顾名思义，回调就是回过头去调用某个地方的函数，这种调用是注重时机的，在某个特定的时间回去调用特定的函数。假设一个场景，有一个button，点击button可以移除listview的第一个it">
+  <meta name="description" content="内存泄露指的是在gc进行回收时，无法回收本应该回收的对象，造成该对象重复出现，占用内存，严重影响app性能。
+　　最常见的内存泄露情况是handler作为匿名内部类直接使用，而不是使用静态内部类。这种情况，匿名内部类Handler会保持对外部类的一个引用（假设是Activity），那么Activit">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="浅谈android回调"/>
+  <meta property="og:title" content="Android Studio内存泄露"/>
   <meta property="og:site_name" content="居仙阁"/>
 
   
@@ -52,31 +52,23 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-07-28T13:07:50.000Z"><a href="/2016/07/28/谈谈回调函数这回事/">2016-07-28</a></time>
+        <time datetime="2016-08-19T08:52:50.000Z"><a href="/2016/08/19/Android Studio内存泄露/">2016-08-19</a></time>
       
       
   
-    <h1 class="title">浅谈android回调</h1>
+    <h1 class="title">Android Studio内存泄露</h1>
   
 
     </header>
     <div class="entry">
       
-        <p>　　在android开发中，回调接口出现的次数可谓不少，回调接口和回调函数是一码事。那么什么是回调函数呢？ </p>
-<p>　　顾名思义，回调就是回过头去调用某个地方的函数，这种调用是注重时机的，在某个特定的时间回去调用特定的函数。假设一个场景，有一个button，点击button可以移除listview的第一个item，这个时候就可以定义一个回调接口:</p>
-<p><code>public interface OnButtonClickListener{void onClickRemove();}</code></p>
-<p>直接让Adapter实现这个接口</p>
-<p>`@override </p>
-<p>public void onClickRemove()</p>
-<p>{</p>
-<p>mItems.remove(0);</p>
-<p>notifyItemRemoved(0);</p>
-<p>}`</p>
-<p>　　在button所在的MainActivity声明一个全局变量OnButtonClickListener mOnButtonClickListener = null；并且在给listview设置适配器的同时，将Adapter强转为OnButtonClickListener即</p>
-<p><code>mOnButtonClickListener = (OnButtonClickListener)adapter;</code></p>
-<p>这个时候我们就获得了回调接口的实现了。</p>
-<p>　　万事俱备，就等时机到来。当button被点击的时候，我们就直接调用mOnButtonClickListener.onClickRemove()方法，实现了点击button删除第一个item的功能。</p>
-<p>　　回过头来分析一下，回调的使用一般都是在两个环境中，在一个环境中的某个时机，我们想更新另一个环境的数据，那就考虑用回调了。接口实现方就是需要被更新的环境，接口调用方（也是接口书写的一方）通过调用接口的方法就可以去目标环境更新数据了。这就是回过去调用的过程嘛，当然，我们可以在调用方传递参数过去，以便实现特定功能，这就是看接口的书写格式咯。</p>
+        <p>　　内存泄露指的是在gc进行回收时，无法回收本应该回收的对象，造成该对象重复出现，占用内存，严重影响app性能。</p>
+<p>　　最常见的内存泄露情况是handler作为匿名内部类直接使用，而不是使用静态内部类。这种情况，匿名内部类Handler会保持对外部类的一个引用（假设是Activity），那么Activity在本应该被回收的时候会因为保留有Handler引用，且Handler中的msg或者runnable还没运行完，那就造成Activity无法被回收了，产生泄露问题。解决的办法就是使用静态内部类，并且该静态内部类的引用在可能的情况下使用弱引用。如果非要使用Context参数，那尽量多用ApplicationContext吧，因为ApplicationContext属于单例，不用担心gc问题。</p>
+<p>　　记录一下我使用as分析内存泄露的过程：左下角点击Android Monitor，现在上方选好要调试的Android设备和应用程序。然后，查看Memory的动态状体图，点击Initiate GC按钮，产生一次gc回收。再点击Dump Java Heap 导出目前的java堆使用情况。如图</p>
+<p>　　<img src="https://github.com/wengxianhuo/wengxianhuo.github.io/blob/hexo/pictures/first.png?raw=true" alt="first"></p>
+<p>　　<img src="https://github.com/wengxianhuo/wengxianhuo.github.io/blob/hexo/pictures/second.png?raw=true" alt="second"></p>
+<p>　　然后看重复的变量，再看看变量的引用树，是什么原因让ｇｃ无法回收变量。</p>
+<p>　　</p>
 
       
     </div>
@@ -86,7 +78,7 @@
         
   
   <div class="tags">
-    <a href="/tags/随想/">随想</a>
+    <a href="/tags/记录/">记录</a>
   </div>
 
         
@@ -129,7 +121,7 @@
   }(document, 'script', 'facebook-jssdk'));
 </script>
 
-<div class="fb-comments" data-href="http://yoursite.com/2016/07/28/谈谈回调函数这回事/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+<div class="fb-comments" data-href="http://yoursite.com/2016/08/19/Android Studio内存泄露/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
       
   
 </section>
