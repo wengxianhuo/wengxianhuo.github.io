@@ -7,7 +7,7 @@
   <meta name="author" content="xianhuojun">
   
   <meta name="description" content="在android开发中，回调接口出现的次数可谓不少，回调接口和回调函数是一码事。那么什么是回调函数呢？ 
-　　顾名思义，回调就是回过头去调用某个地方的函数，这种调用是注重时机的，在某个特定的时间回去调用特定的函数。假设一个场景，有一个button，点击button可以移除listview的第一个it">
+顾名思义，回调就是回过头去调用某个地方的函数，这种调用是注重时机的，在某个特定的时间回去调用特定的函数。假设一个场景，有一个button，点击button可以移除listview的第一个item">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -62,21 +62,28 @@
     </header>
     <div class="entry">
       
-        <p>　　在android开发中，回调接口出现的次数可谓不少，回调接口和回调函数是一码事。那么什么是回调函数呢？ </p>
-<p>　　顾名思义，回调就是回过头去调用某个地方的函数，这种调用是注重时机的，在某个特定的时间回去调用特定的函数。假设一个场景，有一个button，点击button可以移除listview的第一个item，这个时候就可以定义一个回调接口:</p>
-<p><code>public interface OnButtonClickListener{void onClickRemove();}</code></p>
-<p>直接让Adapter实现这个接口</p>
-<p>`@override </p>
-<p>public void onClickRemove()</p>
-<p>{</p>
-<p>mItems.remove(0);</p>
-<p>notifyItemRemoved(0);</p>
-<p>}`</p>
-<p>　　在button所在的MainActivity声明一个全局变量OnButtonClickListener mOnButtonClickListener = null；并且在给listview设置适配器的同时，将Adapter强转为OnButtonClickListener即</p>
-<p><code>mOnButtonClickListener = (OnButtonClickListener)adapter;</code></p>
-<p>这个时候我们就获得了回调接口的实现了。</p>
-<p>　　万事俱备，就等时机到来。当button被点击的时候，我们就直接调用mOnButtonClickListener.onClickRemove()方法，实现了点击button删除第一个item的功能。</p>
-<p>　　回过头来分析一下，回调的使用一般都是在两个环境中，在一个环境中的某个时机，我们想更新另一个环境的数据，那就考虑用回调了。接口实现方就是需要被更新的环境，接口调用方（也是接口书写的一方）通过调用接口的方法就可以去目标环境更新数据了。这就是回过去调用的过程嘛，当然，我们可以在调用方传递参数过去，以便实现特定功能，这就是看接口的书写格式咯。</p>
+        <p>在android开发中，回调接口出现的次数可谓不少，回调接口和回调函数是一码事。那么什么是回调函数呢？ </p>
+<p>顾名思义，回调就是回过头去调用某个地方的函数，这种调用是注重时机的，在某个特定的时间回去调用特定的函数。假设一个场景，有一个button，点击button可以移除listview的第一个item(假设我们无法直接获取List数据集合)，这个时候就可以定义一个回调接口:</p>
+<pre><code>public interface OnButtonClickListener
+{
+    void onClickRemove();
+}
+</code></pre><p>直接让Adapter实现这个接口</p>
+<pre><code>@override 
+
+public void onClickRemove()
+
+{
+
+    mItems.remove(0);
+
+    notifyItemRemoved(0);
+
+}
+</code></pre><p>剩下的事情就很简单了，将adapter强转成接口，调用接口的方法，就可以实现数据集的删除操作。</p>
+<p>以上就是一个回调的全过程：在button被点击的时机，我们在另一个环境（Adapter类）进行数据集的删除操作，并更新了view。</p>
+<p>按照我的理解，当我们在开发过程中涉及到在两个环境间需要交互，比如一个Activity在特定时机需要知道所有Fragment的成员变量值，我们可以设计一个回调接口，把想要知道的Fragment的成员变量通过接口的参数就可以传递给Activity。当然，我们也可以让Fragment实现接口，将Fragment内的所有需要的参数打包到List集合，并作为返回值返回，我们直接在Activity获得这个回调接口的值便可以。</p>
+<p>总结：回调接口可以沟通两个不同的环境（或者说类）。假设一个Activity想对一个Fragment进行操作。接口的实现可以对Fragment环境实现具体的操作，接口的参数可以将Fragment的某些参数返回给Activity。</p>
 
       
     </div>
